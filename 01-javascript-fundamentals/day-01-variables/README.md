@@ -59,3 +59,8 @@ Your job goal
 
 # ========== Now go to the main repository folder:
   cd ../..
+
+# === git status
+git add .
+git commit -m "Day 02: Learn operators and conditions"
+git push
