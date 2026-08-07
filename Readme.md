@@ -878,4 +878,31 @@ backend-learning/
     ├── employee-api/
     ├── ecommerce-api/
     └── restaurant-backend/
-    
+#  Long-Term Goal (6–8 Months)
+
+HTML
+        ✅
+CSS
+        ✅
+JavaScript
+        🔄
+React
+        ⏳
+Next.js
+        ⏳
+Node.js
+        ⏳
+Express.js
+        ⏳
+SQL
+        ⏳
+Prisma
+        ⏳
+Authentication
+        ⏳
+Deployment
+        ⏳
+Full-Stack Project
+        ⏳
+Job Preparation
+        ⏳
