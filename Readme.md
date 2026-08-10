@@ -246,7 +246,6 @@ Build these in order:
             35.	Suspense and lazy loading
 # ============ React mini-projects ==================================
  # -- Build these one by one:
-   
       1.	React counter 
         a)	Learn useState 
       2.	To-do application 
@@ -570,7 +569,6 @@ Week 4 :
     Project: Weather application
 # ============= JavaScript revision project: Student Management System
 Features:
-
       Add a student
       Display all students
       Search by name

@@ -1,0 +1,68 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: Arial, sans-serif;
+
+    background: #111;
+}
+
+.clock-container {
+    text-align: center;
+
+    padding: 40px;
+
+    background: white;
+
+    border-radius: 12px;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+#clock {
+    font-size: 50px;
+    font-weight: bold;
+    letter-spacing: 3px;
+}
+.timeformate {
+    margin-top: 30px;
+    text-align: center;
+}
+
+#formatBtn {
+    padding: 10px 22px;
+
+    border: 2px solid #007bff;
+    border-radius: 25px;
+
+    background-color: white;
+    color: #007bff;
+
+    font-size: 25px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: all 0.3s ease;
+}
+
+#formatBtn:hover {
+    background-color: #007bff;
+    color: white;
+    transform: translateY(-2px);
+}
+
+#formatBtn:active {
+    transform: translateY(0);
+}
