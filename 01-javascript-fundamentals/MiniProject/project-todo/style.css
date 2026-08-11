@@ -1,0 +1,163 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: Arial, sans-serif;
+
+    background: #111;
+}
+
+.todo-container {
+    width: 500px;
+
+    padding: 30px;
+
+    background: white;
+
+    border-radius: 12px;
+}
+
+h1 {
+    text-align: center;
+
+    margin-bottom: 25px;
+}
+
+.todo-input {
+    display: flex;
+
+    gap: 10px;
+}
+
+#taskInput {
+    flex: 1;
+
+    padding: 12px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 6px;
+
+    font-size: 16px;
+}
+
+#addBtn {
+    padding: 12px 20px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    background: #007bff;
+
+    color: white;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+#taskList {
+    list-style: none;
+
+    margin-top: 25px;
+}
+
+.task {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 12px;
+
+    margin-bottom: 10px;
+
+    background: #f1f1f1;
+
+    border-radius: 6px;
+}
+
+.task-text {
+    cursor: pointer;
+}
+
+.completed {
+    text-decoration: line-through;
+
+    opacity: 0.5;
+}
+
+.delete-btn {
+    padding: 6px 10px;
+
+    border: none;
+
+    border-radius: 5px;
+
+    background: #dc3545;
+
+    color: white;
+
+    cursor: pointer;
+}
+
+#taskList {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+#taskList li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  border-bottom: 1px solid #ddd;
+}
+
+#taskList li span {
+  cursor: pointer;
+}
+
+/* Strikethrough style for completed tasks */
+#taskList li span.completed {
+  text-decoration: line-through;
+  color: #888;
+}
+
+.delete-btn {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background-color: #cc0000;
+}
+/* .errorMessage {
+  font-size: 12px;
+  color: #cc0000;
+  margin-top: 5px;
+  display: block;
+} */
+
+#errorMessage {
+    color: red;
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: bold;
+}
