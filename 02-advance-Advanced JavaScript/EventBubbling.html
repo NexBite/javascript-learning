@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Bubbling</title>
+</head>
+<body>
+  <h3>
+    Event bubbling means:
+    When an event happens on a child element, the event can propagate upward through its parent elements.
+  </h3>
+
+  <div id="parent">
+    <button id="child">click me</button>
+  </div>
+
+  <script>
+    const parent = document.getElementById("parent");
+    const child = document.getElementById("child");
+
+    parent.addEventListener("click", () => {
+      console.log("parent click");
+    });
+
+    child.addEventListener("click", () => {
+      console.log("child click");
+      alert("child click");
+    });
+  </script>
+</body>
+</html>
