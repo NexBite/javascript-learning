@@ -14684,3 +14684,451 @@ console.log(triple(5)); // 15 (calculates 3 * 5)
 
 # --- What does constructor() do?
     runs automatically when you use:
+
+# --=================================== 20️ Error Handling
+# -- Common JavaScript errors
+   # - 1. ReferenceError
+    Trying to use something that doesn't exist:
+    console.log(userName);
+   # - 2. TypeError
+    Trying to perform an operation on an inappropriate value:
+    const user = null;
+    console.log(user.name);
+   # - 3. SyntaxError
+    Invalid JavaScript syntax:
+    if (true {
+        console.log("Hello");
+    }
+   # - 4. RangeError
+    A value is outside the allowed range.
+    For example:
+    const arr = new Array(-1);
+# - Why do we need error handling?
+    Imagine you're calling an API:
+    const response = await fetch("/api/users");
+    What if:
+    Internet connection fails?
+    Server is down?
+    API returns an error?
+    JSON is invalid?
+    Your application shouldn't simply crash.
+# - ========== 21️ try, catch, finally
+Using throw with try/catch
+
+# -- 22️ Fetch API
+fetch()
+Fetch is used to make HTTP requests.
+fetch("https://example.com/api/users");
+A Fetch request returns a Promise.
+fetch(...)
+Fetch
+  ↓
+Promise
+  ↓
+.then()
+  ↓
+async/await
+# -- Basic Fetch
+fetch("https://example.com/api/users")
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+    })
+    .catch(error => {
+        console.log(error);
+    });
+ # - Step 1 — Fetch
+    fetch(url)
+    returns a Promise containing a Response.
+ # - Step 2 — Convert response to JSON
+    response.json()
+    That's why we use another .then().
+    fetch(url)
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+    });
+# - Fetch with async/await
+async function getUsers() {
+
+    try {
+
+        const response = await fetch(
+            "https://example.com/api/users"
+        );
+
+        const data = await response.json();
+
+        console.log(data);
+
+    } catch (error) {
+
+        console.log(error);
+
+    }
+
+}
+async function getUsers() {
+
+    try {
+
+        const response = await fetch(
+            "https://example.com/api/users"
+        );
+
+        if (!response.ok) {
+            throw new Error(`HTTP error: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        console.log(data);
+
+    } catch (error) {
+
+        console.log(error.message);
+
+    }
+
+}
+# - HTTP Status
+200 → OK
+201 → Created
+400 → Bad Request
+401 → Unauthorized
+403 → Forbidden
+404 → Not Found
+500 → Server Error
+
+# -- GET Request
+   # - Give me data.
+    async function getProducts() {
+
+    const response = await fetch(
+        "https://example.com/api/products"
+    );
+
+    const products = await response.json();
+
+    console.log(products);
+
+}
+# - -POST Request
+    POST means:
+    Send/create data.
+    async function createUser() {
+
+    const user = {
+        name: "Aditya",
+        age: 30
+    };
+
+    const response = await fetch(
+        "https://example.com/api/users",
+        {
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify(user)
+        }
+    );
+
+    const data = await response.json();
+
+    console.log(data);
+
+}
+# -- 23️ JSON
+    JSON means:
+    JavaScript Object Notation
+    It is a common text format used to exchange data between applications.
+    {
+    "name": "Aditya",
+    "age": 30,
+    "city": "Delhi"
+}
+
+# - JavaScript Object
+const user = {
+    name: "Aditya",
+    age: 30
+};
+JSON
+{
+    "name": "Aditya",
+    "age": 30
+}
+
+JSON property names use double quotes.
+# -- JSON.stringify()
+Converts a JavaScript object into a JSON string.
+    const user = {
+        name: "Aditya",
+        age: 30
+    };
+    const jsonData = JSON.stringify(user);
+    console.log(jsonData);
+# -- JSON.parse()
+Converts JSON string back into a JavaScript object.
+const jsonData = '{"name":"Aditya","age":30}';
+const user = JSON.parse(jsonData);
+console.log(user.name);
+# - stringify vs parse
+| Method             | Conversion                      |
+| ------------------ | ------------------------------- |
+| `JSON.stringify()` | Object → JSON string            |
+| `JSON.parse()`     | JSON string → JavaScript object |
+# -- JSON + Fetch
+    When receiving API data:
+    const response = await fetch(url);
+    const data = await response.json();
+    The response body is converted from JSON into a JavaScript value.
+# -- When sending data:
+body: JSON.stringify(user)
+
+# --- Complete API Flow
+    Imagine your frontend sends:
+    const user = {
+        name: "Aditya",
+        age: 30
+    };
+    Sending:
+    JavaScript Object
+        ↓
+    JSON.stringify()
+        ↓
+    JSON
+        ↓
+    HTTP Request
+        ↓
+    Backend
+    Receiving:
+    Backend
+    ↓
+    HTTP Response
+    ↓
+    JSON
+    ↓
+    response.json()
+    ↓
+    JavaScript Object
+
+    This is fundamental for React + Spring Boot later.
+
+  # --Interview Questions
+  # -  Q1. What is error handling?
+    A mechanism for detecting and handling runtime problems without allowing the application to fail unexpectedly.
+   # - Q2. What is the purpose of try...catch?
+    To execute potentially failing code and handle errors that occur during execution.
+   # - Q3. Does finally always execute?
+    Normally yes, whether the try succeeds or the catch handles an error. There are exceptional cases such as abrupt termination of the JavaScript environment.
+   #  Q4. What is Fetch API?
+    A modern browser API for making HTTP requests and working with network resources.
+   # Q5. Does fetch() return a Promise?
+    Yes.
+    fetch(url)
+    returns a Promise.
+   # Q6. Does fetch() reject on HTTP 404?
+    No, not simply because the server returned 404.
+    You should check:
+    if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+    }
+   # Q7. What does response.json() do?
+    It reads the response body and parses JSON into a JavaScript value. It returns a Promise.
+   # Q8. What does JSON.stringify() do?
+    Converts a JavaScript value, typically an object, into a JSON string.
+   # Q9. What does JSON.parse() do?
+    Converts a valid JSON string into a JavaScript value.
+
+  # -- ================ 24️ Local Storage  ================
+    localStorage allows you to store data in the browser.
+    The important point:
+    Data remains even after you close and reopen the browser.
+    localStorage.setItem("username", "Aditya");
+    const username = localStorage.getItem("username");
+    console.log(username);
+# -- ============== Basic Local Storage Methods
+There are 4 methods you should know:
+    localStorage.setItem()
+    localStorage.getItem()
+    localStorage.removeItem()
+    localStorage.clear()
+# -1. setItem()
+   localStorage.setItem("username", "Aditya");
+# - 2. getItem()
+    Retrieve data:
+    const username = localStorage.getItem("username");
+    console.log(username);
+# - 3. removeItem()
+    Remove one item:
+    localStorage.removeItem("username");
+# - 4. clear()
+    Remove everything from local storage:
+    localStorage.clear();
+# -- localStorage.setItem("user", JSON.stringify(user));
+# -- Save a user
+    const user = {
+    name: "Aditya",
+    age: 30,
+    city: "Delhi"
+};
+
+localStorage.setItem(
+    "user",
+    JSON.stringify(user)
+);
+# -Retrieve:
+    const data = localStorage.getItem("user");
+
+if (data) {
+    const user = JSON.parse(data);
+
+    console.log(user.name);
+    console.log(user.age);
+    console.log(user.city);
+}
+# -- ============ 25️ Session Storage
+sessionStorage works similarly to localStorage.
+sessionStorage.setItem("username", "Aditya");
+# - Retrieve:
+const username = sessionStorage.getItem("username");
+console.log(username);
+|                                   | `localStorage`                  | `sessionStorage`           |
+| --------------------------------- | ------------------------------- | -------------------------- |
+| Data survives page refresh        | ✅                               | ✅                          |
+| Data survives closing browser/tab | Usually ✅                       | ❌                          |
+| API                               | Same basic methods              | Same basic methods         |
+| Stores strings                    | ✅                               | ✅                          |
+| Typical use                       | Preferences, simple persistence | Temporary tab/session data |
+
+# ================== 26️ DOM Manipulation 
+document.getElementById()
+const counter = document.getElementById("counter");
+The DOM represents the HTML document as objects that JavaScript can access and modify.
+# -HTML
+<h1 id="title">Hello</h1>
+
+#  - JavaScript:
+const title = document.getElementById("title");
+title.innerText = "Hello Aditya";
+
+# -- Important DOM selectors
+
+    # getElementById()
+       const title = document.getElementById("title");
+    # - querySelector()
+        const title = document.querySelector("#title");
+    # - Class:
+        const button = document.querySelector(".btn");
+    # -Element:
+        const heading = document.querySelector("h1");
+    # -querySelectorAll()
+        Selects all matching elements:
+         const buttons = document.querySelectorAll(".btn");
+         buttons.forEach(button => {
+                console.log(button);
+            });
+# --- Changing HTML content
+    # - innerText
+        title.innerText = "New Title";
+        title.innerHTML = "<strong>Hello</strong>";
+        element.textContent = userInput;
+    # - textContent
+        title.textContent = "New Title";
+# -- Changing CSS
+    title.style.color = "red";
+    title.style.fontSize = "40px";
+    But for larger UI changes, it's generally cleaner to use CSS classes:
+    But for larger UI changes, it's generally cleaner to use CSS classes:
+    # - Remove:
+    title.classList.remove("active");
+    # - Toggle:
+        title.classList.toggle("active");
+    # - Check:
+        title.classList.contains("active");
+    # - span.classList.toggle("completed");
+# - Creating Elements
+    You can create HTML elements using JavaScript:
+        const li = document.createElement("li");
+        Add text:
+            li.textContent = "Learn JavaScript";
+      Add it to the page:
+             taskList.appendChild(li);
+# --  Removing Elements
+    li.remove();
+# --- DOM Events
+    click
+    input
+    change
+    submit
+    keydown
+    keyup
+    mouseover
+    mouseout
+  # - button.addEventListener("click", () => {
+    console.log("Button clicked");
+    });  
+  # - Input:
+      input.addEventListener("input", () => {
+    console.log(input.value);
+    });
+# - Keyboard:
+    input.addEventListener("keydown", event => {
+    console.log(event.key);
+    });
+# ------------- Real-world example
+ html:
+    <input id="nameInput" placeholder="Enter your name">
+    <button id="saveBtn">Save</button>
+    <h2 id="result"></h2>
+JavaScript:
+    const nameInput = document.getElementById("nameInput");
+    const saveBtn = document.getElementById("saveBtn");
+    const result = document.getElementById("result");
+    saveBtn.addEventListener("click", () => {
+        const name = nameInput.value.trim();
+        if (name === "") {
+            result.textContent = "Please enter your name";
+            return;
+        }
+        localStorage.setItem("username", name);
+        result.textContent = `Welcome, ${name}!`;
+    });
+Then when the page loads, retrieve the saved name:
+    const savedName = localStorage.getItem("username");
+
+if (savedName) {
+    result.textContent = `Welcome back, ${savedName}!`;
+}
+DOM
+ +
+Events
+ +
+Local Storage
+# -----========== Important interview questions
+# 1. What is localStorage?
+Browser storage that allows key-value data to persist across browser sessions.
+# 2. What does localStorage store?
+Values are stored as strings.
+# 3. How do you store an object?
+localStorage.setItem(
+    "user",
+    JSON.stringify(user)
+);
+# 4. How do you retrieve it?
+const user = JSON.parse(
+    localStorage.getItem("user")
+);
+# 5. Difference between localStorage and sessionStorage?
+localStorage generally persists after the browser is closed, while sessionStorage is tied to the page session/tab and is cleared when that session ends.
+# 6. What is DOM?
+The Document Object Model — a programming representation of the HTML document that JavaScript can interact with.
+7. Difference between querySelector() and querySelectorAll()?
+querySelector()
+returns the first matching element.
+querySelectorAll()
+returns all matching elements.
